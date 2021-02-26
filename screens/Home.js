@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   StyleSheet,
@@ -11,14 +11,21 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  LogBox,
 } from "react-native";
-import { getPixelSizeForLayoutSize } from "react-native/Libraries/Utilities/PixelRatio";
 
-import { PriceAlert } from "../components";
+import { PriceAlert, TransactionHistory, CurrencyLabel } from "../components";
 import { COLORS, SIZES, FONTS, icons, images, dummyData } from "../constants";
 
 export default function Home({ navigation }) {
   const [trending, setTrending] = useState(dummyData.trendingCurrencies);
+  const [transactionHistory, setTransactionHistory] = useState(
+    dummyData.transactionHistory
+  );
+
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
 
   function renderHeader() {
     function renderItem({ item, index }) {
@@ -35,9 +42,17 @@ export default function Home({ navigation }) {
             backgroundColor: COLORS.white,
             ...styles.shadow,
           }}
+          onPress={() =>
+            navigation.navigate("CryptoDetail", { currency: item })
+          }
         >
           {/* Currency */}
-          <View style={{ flexDirection: "row" }}>
+          <CurrencyLabel
+            icon={item.image}
+            currency={item.currency}
+            code={item.code}
+          />
+          {/* <View style={{ flexDirection: "row" }}>
             <View>
               <Image
                 source={item.image}
@@ -51,7 +66,7 @@ export default function Home({ navigation }) {
                 {item.code}
               </Text>
             </View>
-          </View>
+          </View> */}
 
           {/* Value */}
           <View style={{ marginTop: SIZES.radius }}>
@@ -206,12 +221,22 @@ export default function Home({ navigation }) {
     );
   }
 
+  function renderTransactionHistory() {
+    return (
+      <TransactionHistory
+        history={transactionHistory}
+        customContainerStyle={styles.shadow}
+      />
+    );
+  }
+
   return (
-    <ScrollView>
+    <ScrollView showsHorizontalScrollIndicator={false}>
       <View style={{ flex: 1, paddingBottom: 130 }}>
         {renderHeader()}
         {renderAlert()}
         {renderNotice()}
+        {renderTransactionHistory()}
       </View>
     </ScrollView>
   );

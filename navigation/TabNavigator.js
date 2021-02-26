@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CryptoDetail, Transaction } from "../screens";
+import { Home, Transaction } from "../screens";
 
 import { COLORS, FONTS, icons } from "../constants";
-import { HomeStackNavigator, SettingsStackNavigator } from "./StackNavigator";
+// import { HomeStackNavigator, SettingsStackNavigator } from "./StackNavigator";
 
 import { TabBarIcon, TabBarCustomButton } from "../components";
 
@@ -30,7 +30,7 @@ export default function TabNavigator() {
     >
       <Tab.Screen
         name="Home"
-        component={HomeStackNavigator}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} title={"Home"} icon={icons.home} />
@@ -39,7 +39,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Portfolio"
-        component={CryptoDetail}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
@@ -52,7 +52,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Transaction"
-        component={Transaction}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -69,7 +69,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Prices"
-        component={HomeStackNavigator}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
@@ -82,7 +82,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsStackNavigator}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <TabBarIcon

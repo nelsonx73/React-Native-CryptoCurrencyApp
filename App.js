@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigator from "./navigation/DrawerNavigator";
+import { HomeStackNavigator } from "./navigation/StackNavigator";
 
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
@@ -19,7 +19,7 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <DrawerNavigator />
+        <HomeStackNavigator />
       </NavigationContainer>
     );
   }
